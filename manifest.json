@@ -10,7 +10,7 @@
       {
         "version": "1.2.5.0",
         "targetAbi": "10.11.0.0",
-        "sourceUrl": "REPLACE_WITH_GITHUB_RELEASE_URL",
+        "sourceUrl": "https://github.com/YTSamLee/Jellyfin2HQPlayer-plugin/releases/download/v1.2.5/Jellyfin2HQPlayerPlugin-1.2.5.zip",
         "checksum": "bfdabadd3eb834d7a5b160f1678d137d7bb6c53633920f30e40db771a1e3a738",
         "changelog": "Version 1.2.5 official package metadata update."
       }
