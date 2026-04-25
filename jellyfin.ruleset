@@ -49,7 +49,7 @@
         <!-- error on CA2016: Forward the CancellationToken parameter to methods that take one
             or pass in 'CancellationToken.None' explicitly to indicate intentionally not propagating the token -->
         <Rule Id="CA2016" Action="Error" />
-        <!-- error on CA2254: Template should be a static expression -->
+        <!-- error on CA2254: Jellyfin2HQPlayer should be a static expression -->
         <Rule Id="CA2254" Action="Error" />
 
         <!-- disable warning CA1014: Mark assemblies with CLSCompliantAttribute -->

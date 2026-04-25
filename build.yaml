@@ -1,16 +1,18 @@
 ---
-name: "Template"
+name: "Jellyfin2HQPlayer"
 guid: "eb5d7894-8eef-4b36-aa6f-5d124e828ce1"
-version: "1.0.0.0"
-targetAbi: "10.9.0.0"
-framework: "net8.0"
-overview: "Short description about your plugin"
+version: "1.2.5.0"
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+overview: "Map Jellyfin media file paths to Jellyfin ItemIds for HQPlayer integration."
 description: >
-  This is a longer description that can span more than one
-  line and include details about your plugin.
+  Jellyfin2HQPlayer provides a path-to-ItemId index for Jellyfin music libraries.
+  It helps external HQPlayer control applications match local file playback paths
+  back to Jellyfin library items.
 category: "General"
-owner: "jellyfin"
+owner: "YTSam"
 artifacts:
-- "Jellyfin.Plugin.Template.dll"
+- "Jellyfin.Plugin.Jellyfin2HQPlayer.dll"
+- "Jellyfin.Plugin.Jellyfin2HQPlayer.deps.json"
 changelog: >
-  changelog
+  Version 1.2.5 official package metadata update.

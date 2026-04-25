@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jellyfin.Plugin.Jellyfin2HQPlayer</name>
+    </assembly>
+    <members>
+        <member name="T:Jellyfin.Plugin.Jellyfin2HQPlayer.Configuration.PluginConfiguration">
+            <summary>
+            Plugin configuration.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Jellyfin2HQPlayer.Configuration.PluginConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Jellyfin2HQPlayer.Configuration.PluginConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.Jellyfin2HQPlayer.EntryPoint.LibraryItemEventLoggerService">
+            <summary>
+            监听 Jellyfin 媒体库变更事件（ItemAdded / ItemRemoved）
+            并通过防抖调度触发 PathIndex 重建
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Jellyfin2HQPlayer.EntryPoint.LibraryItemEventLoggerService.OnItemAdded(System.Object,MediaBrowser.Controller.Library.ItemChangeEventArgs)">
+            <summary>
+            任意类型 Item 被添加（Audio / Album / Artist / Folder 等）
+            不做类型过滤，统一进入防抖调度
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Jellyfin2HQPlayer.EntryPoint.LibraryItemEventLoggerService.OnItemRemoved(System.Object,MediaBrowser.Controller.Library.ItemChangeEventArgs)">
+            <summary>
+            任意类型 Item 被删除
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Jellyfin2HQPlayer.EntryPoint.LibraryItemEventLoggerService.ScheduleDebounce(System.String,System.String,System.String)">
+            <summary>
+            防抖调度：
+            1. 取消之前的任务
+            2. 延时执行 rebuild
+            3. 保证同一时间只有一个 rebuild 在运行
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin">
+            <summary>
+            The main plugin.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,MediaBrowser.Model.Serialization.IXmlSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin"/> class.
+            </summary>
+            <param name="applicationPaths">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IApplicationPaths"/> interface.</param>
+            <param name="xmlSerializer">Instance of the <see cref="T:MediaBrowser.Model.Serialization.IXmlSerializer"/> interface.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin.Instance">
+            <summary>
+            Gets the current plugin instance.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin.Description">
+            <summary>
+            Gets the plugin description.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Jellyfin2HQPlayer.Plugin.GetPages">
+            <summary>
+            Gets the plugin pages.
+            </summary>
+            <returns>Plugin pages.</returns>
+        </member>
+    </members>
+</doc>

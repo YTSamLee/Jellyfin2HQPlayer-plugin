@@ -1,0 +1,116 @@
+<div id="Jellyfin2HQPlayerConfigPage"
+     data-role="page"
+     class="page type-interior pluginConfigurationPage"
+     data-require="emby-button">
+
+    <div data-role="content">
+        <div class="content-primary">
+
+            <h2>Jellyfin2HQPlayer</h2>
+
+            <div class="inputContainer">
+                <label class="inputLabel inputLabelUnfocused">Status</label>
+                <div id="pluginStatus">Loading...</div>
+            </div>
+
+            <div class="inputContainer">
+                <label class="inputLabel inputLabelUnfocused">Count</label>
+                <div id="pluginCount">0</div>
+            </div>
+
+            <!-- 新增字段：Total Audio Count -->
+            <div class="inputContainer">
+                <label class="inputLabel inputLabelUnfocused">Total Audio Count</label>
+                <div id="totalAudioCount">Loading...</div>
+            </div>
+
+            <!-- 新增字段：Last Updated -->
+            <div class="inputContainer">
+                <label class="inputLabel inputLabelUnfocused">Last Updated</label>
+                <div id="lastUpdated">Loading...</div>
+            </div>
+
+            <div style="margin-top: 2em;">
+                <button id="rebuildButton"
+                        is="emby-button"
+                        type="button"
+                        class="raised button-submit block emby-button">
+                    <span>Rebuild</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            const page = document.querySelector('#Jellyfin2HQPlayerConfigPage');
+            const statusEl = page.querySelector('#pluginStatus');
+            const countEl = page.querySelector('#pluginCount');
+            const totalAudioCountEl = page.querySelector('#totalAudioCount');
+            const lastUpdatedEl = page.querySelector('#lastUpdated');
+            const rebuildBtn = page.querySelector('#rebuildButton');
+
+            function formatLastUpdated(value) {
+              if (!value) return 'Not available';
+
+              const dt = new Date(value);
+              if (Number.isNaN(dt.getTime())) {
+                return value;
+              }
+
+              return dt.toLocaleString();
+            }
+            async function loadStatus() {
+                Dashboard.showLoadingMsg();
+                try {
+                    const res = await fetch('/Plugins/Jellyfin2HQPlayer/status');
+                    const data = await res.json();
+
+                    statusEl.textContent = data.ready ? 'READY' : 'NOT READY';
+                    countEl.textContent = data.count ?? 0;
+                    totalAudioCountEl.textContent = data.totalAudioCount ?? '0';
+                    lastUpdatedEl.textContent = formatLastUpdated(data.lastUpdated);
+                } catch (e) {
+                    statusEl.textContent = 'ERROR';
+                    countEl.textContent = '0';
+                    totalAudioCountEl.textContent = 'ERROR';
+                    lastUpdatedEl.textContent = 'ERROR';
+                    console.error('[Jellyfin2HQPlayer] loadStatus failed:', e);
+                } finally {
+                    Dashboard.hideLoadingMsg();
+                }
+            }
+
+            async function rebuild() {
+                Dashboard.showLoadingMsg();
+                rebuildBtn.disabled = true;
+                try {
+                    const res = await fetch('/Plugins/Jellyfin2HQPlayer/rebuild', {
+                        method: 'POST'
+                    });
+                    const data = await res.json();
+
+                    statusEl.textContent = data.ready ? 'READY' : 'NOT READY';
+                    countEl.textContent = data.count ?? 0;
+                    totalAudioCountEl.textContent = data.totalAudioCount ?? '0';
+                    lastUpdatedEl.textContent = formatLastUpdated(data.lastUpdated);
+                } catch (e) {
+                    console.error('[Jellyfin2HQPlayer] rebuild failed:', e);
+                    alert('Rebuild failed');
+                } finally {
+                    rebuildBtn.disabled = false;
+                    Dashboard.hideLoadingMsg();
+                }
+            }
+
+            page.addEventListener('pageshow', function () {
+                loadStatus();
+            });
+
+            rebuildBtn.addEventListener('click', function () {
+                rebuild();
+            });
+        })();
+    </script>
+</div>

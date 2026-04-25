@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Jellyfin.Plugin.Template.Configuration;
+using Jellyfin.Plugin.Jellyfin2HQPlayer.Configuration;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
 
-namespace Jellyfin.Plugin.Template;
+namespace Jellyfin.Plugin.Jellyfin2HQPlayer;
 
 /// <summary>
 /// The main plugin.
@@ -26,7 +26,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     }
 
     /// <inheritdoc />
-    public override string Name => "Template";
+    public override string Name => "Jellyfin2HQPlayer";
 
     /// <inheritdoc />
     public override Guid Id => Guid.Parse("eb5d7894-8eef-4b36-aa6f-5d124e828ce1");
@@ -36,7 +36,16 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     /// </summary>
     public static Plugin? Instance { get; private set; }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Gets the plugin description.
+    /// </summary>
+    public override string Description =>
+        "File path to Jellyfin ItemId for HQPlayer playback.By YTSam 563422071@qq.com";
+
+    /// <summary>
+    /// Gets the plugin pages.
+    /// </summary>
+    /// <returns>Plugin pages.</returns>
     public IEnumerable<PluginPageInfo> GetPages()
     {
         return
@@ -44,7 +53,10 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
             new PluginPageInfo
             {
                 Name = Name,
-                EmbeddedResourcePath = string.Format(CultureInfo.InvariantCulture, "{0}.Configuration.configPage.html", GetType().Namespace)
+                EmbeddedResourcePath = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}.Configuration.configPage.html",
+                    GetType().Namespace)
             }
         ];
     }

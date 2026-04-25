@@ -1,0 +1,82 @@
+Jellyfin2HQPlayer Plugin - Windows x64 Deployment Guide
+
+--------------------------------------------------
+1. Files
+--------------------------------------------------
+Place both files in the same directory:
+
+deploy-jellyfin-plugin-windows-x64.ps1
+Jellyfin2HQPlayerPlugin-1.0.0.tar.gz
+
+
+--------------------------------------------------
+2. Run PowerShell
+--------------------------------------------------
+Right-click in the folder → "Open in Terminal" (PowerShell)
+
+Or open PowerShell and cd into the directory
+
+
+--------------------------------------------------
+3. Allow script execution (temporary)
+--------------------------------------------------
+Run:
+
+Set-ExecutionPolicy -Scope Process Bypass
+
+
+--------------------------------------------------
+4. Install
+--------------------------------------------------
+Run:
+
+.\deploy-jellyfin-plugin-windows-x64.ps1
+
+
+--------------------------------------------------
+5. Restart Jellyfin (IMPORTANT)
+--------------------------------------------------
+You MUST restart Jellyfin manually:
+
+If using Tray version:
+- Right-click tray icon → Stop Jellyfin
+- Then Start Jellyfin again
+
+If using Service:
+- Restart from Services or:
+
+  Restart-Service Jellyfin
+
+
+--------------------------------------------------
+6. Verify
+--------------------------------------------------
+Open in browser:
+
+http://<IP>:8096
+
+Go to:
+
+Dashboard -> Plugins
+
+You should see:
+
+Jellyfin2HQPlayer
+
+
+--------------------------------------------------
+7. Notes
+--------------------------------------------------
+- Run in the same directory as:
+  deploy-jellyfin-plugin-windows-x64.ps1
+  Jellyfin2HQPlayerPlugin-1.0.0.tar.gz
+
+- Do NOT rename the package unless you update the script
+
+- Script requires Jellyfin NOT running during install
+
+
+--------------------------------------------------
+Summary
+--------------------------------------------------
+Two files + one command + restart = done

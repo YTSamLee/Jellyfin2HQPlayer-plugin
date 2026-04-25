@@ -1,0 +1,138 @@
+Jellyfin2HQPlayer Plugin - Standard Deployment (Linux + Windows + macOS)
+
+==================================================
+1. BUILD (One-time, cross-platform)
+==================================================
+
+cd ~/Jellyfin2HQPlayer-plugin/Jellyfin.Plugin.Jellyfin2HQPlayer
+# Run on ANY machine (Linux, Windows, or macOS)
+
+dotnet clean
+rm -rf bin obj
+
+dotnet build -c Release
+
+# Output directory:
+Jellyfin.Plugin.Jellyfin2HQPlayer/bin/Release/net9.0/
+
+# Files to deploy:
+- Jellyfin.Plugin.Jellyfin2HQPlayer.dll
+- Jellyfin.Plugin.Jellyfin2HQPlayer.deps.json
+- (optional) .pdb / .xml
+
+
+==================================================
+2. LINUX DEPLOYMENT
+==================================================
+
+# 1. Create plugin directory
+sudo mkdir -p /var/lib/jellyfin/plugins/Jellyfin2HQPlayer
+
+# 2. Copy files
+sudo cp bin/Release/net9.0/* /var/lib/jellyfin/plugins/Jellyfin2HQPlayer/
+
+# 3. Fix permissions
+sudo chown -R jellyfin:jellyfin /var/lib/jellyfin/plugins/Jellyfin2HQPlayer
+sudo chmod -R 755 /var/lib/jellyfin/plugins/Jellyfin2HQPlayer
+
+# 4. Restart Jellyfin
+sudo systemctl restart jellyfin
+
+# 5. Test
+curl "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/ping"
+curl "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/status"
+
+curl -X POST "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/rebuild" | jq
+
+==================================================
+3. WINDOWS DEPLOYMENT
+==================================================
+
+# 1. Create plugin directory
+mkdir C:\ProgramData\Jellyfin\Server\plugins\Jellyfin2HQPlayer
+
+# 2. Copy files
+copy .\bin\Release\net9.0\* C:\ProgramData\Jellyfin\Server\plugins\Jellyfin2HQPlayer\
+
+# 3. Restart Jellyfin
+Restart-Service Jellyfin
+# or
+net stop Jellyfin
+net start Jellyfin
+
+# 4. Test
+curl "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/ping"
+curl "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/status"
+
+
+==================================================
+4. macOS DEPLOYMENT
+==================================================
+
+# 1. Create plugin directory
+mkdir -p "/Users/sam/Library/Application Support/jellyfin/plugins/Jellyfin2HQPlayer"
+
+# 2. Copy files
+cp bin/Release/net9.0/* \
+"/Users/sam/Library/Application Support/jellyfin/plugins/Jellyfin2HQPlayer/"
+
+# 3. Fix permissions (usually not required)
+chmod -R 755 "/Users/sam/Library/Application Support/jellyfin/plugins/Jellyfin2HQPlayer"
+
+# 4. Restart Jellyfin
+pkill -f jellyfin
+
+# Then reopen Jellyfin.app
+
+# 5. Test
+curl "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/ping"
+curl "http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/status"
+
+
+==================================================
+5. OPTIONAL: PATH2ID TEST
+==================================================
+
+# Linux path
+curl 'http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/path2id?path=file:///mnt/xxx.flac'
+
+# Windows path (IMPORTANT: encode special chars)
+curl 'http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/path2id?path=C:/Music/xxx.flac'
+
+# Example with special chars (! must be %21)
+curl 'http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/path2id?path=C:/Music/Test%20%21.flac'
+
+# macOS path
+curl 'http://127.0.0.1:8096/Plugins/Jellyfin2HQPlayer/path2id?path=file:///Users/sam/Music/xxx.flac'
+
+
+==================================================
+6. UPGRADE (ALL PLATFORMS)
+==================================================
+
+# Rebuild
+dotnet build -c Release
+
+# Replace files in plugin directory
+
+# Restart Jellyfin
+
+
+=====================================================
+7. 打包
+cd ~/Jellyfin2HQPlayer-plugin/Jellyfin.Plugin.Jellyfin2HQPlayer/bin/Release/net9.0
+cp * ~/Jellyfin2HQPlayer-plugin/Jellyfin2HQPlayerPlugin
+
+cd ~/Jellyfin2HQPlayer-plugin
+tar -czf Jellyfin2HQPlayerPlugin-1.1.0.tar.gz Jellyfin2HQPlayerPlugin
+
+
+# nano Jellyfin.Plugin.Jellyfin2HQPlayer.csproj
+版本号   <AssemblyVersion>1.1.0.0</AssemblyVersion>
+
+
+
+journalctl -u jellyfin -f 
+
+journalctl -u jellyfin -f | grep J2H
+

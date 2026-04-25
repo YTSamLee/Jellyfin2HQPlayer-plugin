@@ -1,0 +1,19 @@
+[
+  {
+    "category": "General",
+    "guid": "eb5d7894-8eef-4b36-aa6f-5d124e828ce1",
+    "name": "Jellyfin2HQPlayer",
+    "description": "Map Jellyfin media file paths to Jellyfin ItemIds for HQPlayer integration.",
+    "overview": "HQPlayer integration helper plugin.",
+    "owner": "YTSam",
+    "versions": [
+      {
+        "version": "1.2.5.0",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "REPLACE_WITH_GITHUB_RELEASE_URL",
+        "checksum": "bfdabadd3eb834d7a5b160f1678d137d7bb6c53633920f30e40db771a1e3a738",
+        "changelog": "Version 1.2.5 official package metadata update."
+      }
+    ]
+  }
+]
