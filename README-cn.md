@@ -1,64 +1,62 @@
 # Jellyfin2HQPlayer Plugin
 
-Jellyfin2HQPlayer Plugin builds:
+Jellyfin2HQPlayer Plugin 用于建立：
 
-Audio file path -> Jellyfin ItemId
+Audio 文件路径 -> Jellyfin ItemId
 
-mapping for Jellyfin audio libraries and provides REST API query routes for external applications.
-
----
-
-# Features
-
-- Audio file Path → Jellyfin ItemId mapping
-- REST API query routes
-- In-memory index
-- Rebuild index support
-- Standard Jellyfin plugin repository installation
+映射关系，并提供 REST API 查询路由供外部应用调用。
 
 ---
 
-# Supported Jellyfin Version
+# 功能
+
+- Audio 文件 Path → Jellyfin ItemId 映射
+- REST API 查询接口
+- 内存索引
+- 支持重建索引
+- 支持 Jellyfin 标准插件仓库安装
+
+---
+
+# 支持的 Jellyfin 版本
 
 - Jellyfin 10.11.x
 
 ---
 
-# Installation
+# 安装方法
 
-## 1. Open Jellyfin Dashboard
+## 1. 打开 Jellyfin Dashboard
 
 Dashboard -> Plugins
 
-## 2. Click the top-right button
+## 2. 点击右上角
 
 Manage Repositories
 
-## 3. Add Repository
+## 3. 添加仓库
 
-Repository Name:
+Repository Name：
 
 Jellyfin2HQPlayer
 
-Repository URL:
+Repository URL：
 
 https://raw.githubusercontent.com/YTSamLee/Jellyfin2HQPlayer-plugin/main/manifest.json
 
-## 4. Save and refresh the Jellyfin web page
+## 4. 保存后刷新 Jellyfin 页面
 
-## 5. Return to Plugins page
+## 5. 返回 Plugins 页面
 
-Find:
+在 Available 中找到：
 
 Jellyfin2HQPlayer
 
-under Available plugins.
+## 6. 点击 Install
 
-## 6. Click Install
+## 7. 重启 Jellyfin
 
-## 7. Restart Jellyfin
-
-Linux:
+Linux：
 
 ```bash
 sudo systemctl restart jellyfin
@@ -66,25 +64,27 @@ sudo systemctl restart jellyfin
 
 ---
 
-# Plugin Settings Page
+# 插件设置页面
 
-After installation:
+安装完成后：
 
 Dashboard -> Plugins -> My Plugins -> Jellyfin2HQPlayer
 
-The settings page shows:
+可以看到插件设置页面。
 
-- Plugin READY status
-- Indexed audio file count
+页面会显示：
+
+- 插件 READY 状态
+- 已索引 Audio 文件数量
 - Total Audio Count
-- Last Updated time
-- Rebuild index button
+- Last Updated 时间
+- Rebuild 重建索引按钮
 
 ---
 
-# API Routes
+# API 路由
 
-Base route:
+基础路径：
 
 ```text
 /Plugins/Jellyfin2HQPlayer
@@ -92,19 +92,19 @@ Base route:
 
 ---
 
-## Path → ItemId Query
+## Path → ItemId 查询
 
 ```text
 GET /Plugins/Jellyfin2HQPlayer/path2id?path={path}
 ```
 
-Example:
+示例：
 
 ```text
 /Plugins/Jellyfin2HQPlayer/path2id?path=/music/test.flac
 ```
 
-Response:
+返回：
 
 ```json
 {
@@ -119,13 +119,13 @@ Response:
 
 ---
 
-## Plugin Status
+## 插件状态
 
 ```text
 GET /Plugins/Jellyfin2HQPlayer/status
 ```
 
-Response:
+返回：
 
 ```json
 {
@@ -139,13 +139,13 @@ Response:
 
 ---
 
-## Rebuild Index
+## 重建索引
 
 ```text
 POST /Plugins/Jellyfin2HQPlayer/rebuild
 ```
 
-Response:
+返回：
 
 ```json
 {
@@ -171,7 +171,7 @@ https://github.com/YTSamLee/Jellyfin2HQPlayer-plugin
 dotnet build Jellyfin.Plugin.Jellyfin2HQPlayer -c Release
 ```
 
-Build output directory:
+Build 输出目录：
 
 ```text
 Jellyfin.Plugin.Jellyfin2HQPlayer/bin/Release/net9.0/
