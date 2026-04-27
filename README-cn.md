@@ -56,12 +56,6 @@ Jellyfin2HQPlayer
 
 ## 7. 重启 Jellyfin
 
-Linux：
-
-```bash
-sudo systemctl restart jellyfin
-```
-
 ---
 
 # 插件设置页面

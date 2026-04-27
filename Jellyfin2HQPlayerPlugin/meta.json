@@ -7,9 +7,10 @@
   "category": "General",
   "versions": [
     {
-      "version": "1.2.5.0",
+      "version": "1.2.6.0",
       "targetAbi": "10.11.0.0",
-      "sourceUrl": ""
+      "sourceUrl": "https://github.com/YTSamLee/Jellyfin2HQPlayer-plugin/releases/download/v1.2.6/Jellyfin2HQPlayerPlugin-1.2.6.zip",
+      "checksum": "6e44b7e6e987c0bbfe7e868968cf1a4c"
     }
   ]
 }

@@ -58,11 +58,6 @@ under Available plugins.
 
 ## 7. Restart Jellyfin
 
-Linux:
-
-```bash
-sudo systemctl restart jellyfin
-```
 
 ---
 
