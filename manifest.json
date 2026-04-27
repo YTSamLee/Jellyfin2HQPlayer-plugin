@@ -11,7 +11,7 @@
         "version": "1.2.6.0",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/YTSamLee/Jellyfin2HQPlayer-plugin/releases/download/v1.2.6/Jellyfin2HQPlayerPlugin-1.2.6.zip",
-        "checksum": "66a18fb044f20acb660a5ef494803090",
+        "checksum": "7e9f572f41a5cf959119bd7a72715118",
         "changelog": "Add plugin thumbnail."
       }
     ]
