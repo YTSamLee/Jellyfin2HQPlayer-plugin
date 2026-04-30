@@ -177,3 +177,5 @@ Jellyfin.Plugin.Jellyfin2HQPlayer/bin/Release/net9.0/
 # License
 
 GPL-3.0
+
+### [中文版本](README-cn.md) 
